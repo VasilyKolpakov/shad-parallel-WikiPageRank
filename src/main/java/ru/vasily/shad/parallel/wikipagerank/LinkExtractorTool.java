@@ -83,10 +83,6 @@ public class LinkExtractorTool extends Configured implements Tool
 
         job.setOutputFormatClass(SequenceFileOutputFormat.class);
 
-//        int numberOfReducers = reducerCount.equals(ReducerCount.MANY) ?
-//                getConf().getInt(REDUCERS_NUMBER_KEY, 1) : 1;
-//        job.setNumReduceTasks(numberOfReducers);
-
         FileInputFormat.setInputPaths(job, inputPath);
         FileOutputFormat.setOutputPath(job, outputPath);
 

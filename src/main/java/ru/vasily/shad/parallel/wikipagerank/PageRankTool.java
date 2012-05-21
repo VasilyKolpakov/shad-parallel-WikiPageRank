@@ -149,7 +149,8 @@ public class PageRankTool extends Configured implements Tool
         int numberOfIterations = 1;
         Path inputPath = toolInputPath;
         numberOfPageRankChanges = 1;
-        while (numberOfPageRankChanges != 0 && numberOfIterations < 30)
+        int maxIterations = getConf().getInt(ShadParallelConstants.MAX_ITERATIONS_NUMBER_KEY, 30);
+        while (numberOfPageRankChanges != 0 && numberOfIterations < maxIterations)
         {
             String outputFolderName = String.format("%d_page_rank", numberOfIterations);
             Path outputPath = new Path(toolOutputPath, outputFolderName);
@@ -218,8 +219,6 @@ public class PageRankTool extends Configured implements Tool
 
         job.setOutputFormatClass(TextOutputFormat.class);
 
-//        int numberOfReducers = reducerCount.equals(ReducerCount.MANY) ?
-//                getConf().getInt(REDUCERS_NUMBER_KEY, 1) : 1;
         job.setNumReduceTasks(1);
 
         FileInputFormat.setInputPaths(job, inputPath);

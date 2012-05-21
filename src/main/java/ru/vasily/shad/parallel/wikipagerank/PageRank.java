@@ -28,7 +28,7 @@ public class PageRank
     }
 
 
-    private static Path runChainedJobs(Path inputPath, Path outputPath, String[] args, ToolFactory... toolFactories) throws Exception
+    private static void runChainedJobs(Path inputPath, Path outputPath, String[] args, ToolFactory... toolFactories) throws Exception
     {
         Path toolInputPath = inputPath;
         int toolCount = 0;
@@ -43,7 +43,6 @@ public class PageRank
             toolInputPath = toolOutputPath;
             lastUsedOutputPath = toolOutputPath;
         }
-        return lastUsedOutputPath;
     }
 
     private static String folderName(int jobNumber, ToolFactory tool)
